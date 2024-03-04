@@ -108,7 +108,7 @@ namespace MagicVilla_VillaAPI.Controllers
 
             var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
             villa.Name = villaDTO.Name;
-            villa.Sqrt = villaDTO.Sqrt;
+            villa.Sqft = villaDTO.Sqft;
             villa.Occupancy = villaDTO.Occupancy;
 
             return NoContent();
