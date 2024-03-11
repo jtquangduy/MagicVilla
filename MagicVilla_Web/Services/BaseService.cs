@@ -47,7 +47,7 @@ namespace MagicVilla_Web.Services
                         break;
 
                     default:
-                        message.Method = HttpMethod.Post;
+                        message.Method = HttpMethod.Get;
                         break;
                 }
 
