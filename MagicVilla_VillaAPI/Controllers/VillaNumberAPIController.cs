@@ -30,7 +30,7 @@ namespace MagicVilla_VillaAPI.Controllers
         {
             try
             {
-                IEnumerable<VillaNumber> villaNumberList = await _dbVillaNumber.GetAllAsync();
+                IEnumerable<VillaNumber> villaNumberList = await _dbVillaNumber.GetAllAsync(includeProperties: "Villa");
 
                 _response.Result = _mapper.Map<List<VillaNumberDTO>>(villaNumberList);
 
@@ -60,7 +60,7 @@ namespace MagicVilla_VillaAPI.Controllers
                     return BadRequest(_response);
                 }
 
-                var villaNumber = await _dbVillaNumber.GetAsync(filter: u => u.VillaNo == VillaNo);
+                var villaNumber = await _dbVillaNumber.GetAsync(filter: u => u.VillaNo == VillaNo, includeProperties: "Villa");
 
                 if (villaNumber == null)
                 {
