@@ -26,11 +26,11 @@ namespace MagicVilla_Web.Controllers
         {
             List<VillaNumberDTO> list = new();
 
-            var reponse = await _villaNumberService.GetAllAsync<APIResponse>();
+            var response = await _villaNumberService.GetAllAsync<APIResponse>();
 
-            if (reponse != null && reponse.IsSuccess)
+            if (response != null && response.IsSuccess)
             {
-                list = JsonConvert.DeserializeObject<List<VillaNumberDTO>>(Convert.ToString(reponse.Result));
+                list = JsonConvert.DeserializeObject<List<VillaNumberDTO>>(Convert.ToString(response.Result));
             }
 
             return View(list);
@@ -39,11 +39,11 @@ namespace MagicVilla_Web.Controllers
         public async Task<IActionResult> CreateVillaNumber()
         {
             VillaNumberCreateVM villaNumberVM = new();
-            var reponse = await _villaService.GetAllAsync<APIResponse>();
+            var response = await _villaService.GetAllAsync<APIResponse>();
 
-            if (reponse != null && reponse.IsSuccess)
+            if (response != null && response.IsSuccess)
             {
-                villaNumberVM.VillaList = JsonConvert.DeserializeObject<List<VillaDTO>>(Convert.ToString(reponse.Result)).Select(i => new SelectListItem
+                villaNumberVM.VillaList = JsonConvert.DeserializeObject<List<VillaDTO>>(Convert.ToString(response.Result)).Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString(),
@@ -59,12 +59,23 @@ namespace MagicVilla_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var reponse = await _villaNumberService.CreateAsync<APIResponse>(model.VillaNumber);
+                var response = await _villaNumberService.CreateAsync<APIResponse>(model.VillaNumber);
 
-                if (reponse != null && reponse.IsSuccess)
+                if (response != null && response.IsSuccess && response.ErrorMessages.Count==0)
                 {
                     return RedirectToAction(nameof(IndexVillaNumber));
                 }
+            }
+
+            var resp = await _villaService.GetAllAsync<APIResponse>();
+
+            if (resp != null && resp.IsSuccess)
+            {
+                model.VillaList = JsonConvert.DeserializeObject<List<VillaDTO>>(Convert.ToString(resp.Result)).Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString(),
+                });
             }
 
             return View(model);
