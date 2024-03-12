@@ -55,11 +55,11 @@ namespace MagicVilla_Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateVillaNumber(VillaNumberCreateDTO model)
+        public async Task<IActionResult> CreateVillaNumber(VillaNumberCreateVM model)
         {
             if (ModelState.IsValid)
             {
-                var reponse = await _villaNumberService.CreateAsync<APIResponse>(model);
+                var reponse = await _villaNumberService.CreateAsync<APIResponse>(model.VillaNumber);
 
                 if (reponse != null && reponse.IsSuccess)
                 {
