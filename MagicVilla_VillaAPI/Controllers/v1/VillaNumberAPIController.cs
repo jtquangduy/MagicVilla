@@ -6,14 +6,12 @@ using MagicVilla_VillaAPI.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using System.Runtime.InteropServices;
 
-namespace MagicVilla_VillaAPI.Controllers
+namespace MagicVilla_VillaAPI.Controllers.v1
 {
     [Route("api/v{version:apiVersion}/VillaNumberAPI")]
     [ApiController]
     [ApiVersion("1.0")]
-    [ApiVersion("2.0")]
     public class VillaNumberAPIController : ControllerBase
     {
         protected APIResponse _response;
@@ -26,10 +24,10 @@ namespace MagicVilla_VillaAPI.Controllers
             _dbVillaNumber = dbVillaNumber;
             _dbVilla = dbVilla;
             _mapper = mapper;
-            this._response = new();
+            _response = new();
         }
 
-        [MapToApiVersion("1.0")]
+        //[MapToApiVersion("1.0")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetVillaNumbers()
@@ -50,16 +48,6 @@ namespace MagicVilla_VillaAPI.Controllers
                 _response.ErrorMessages = new List<string>() { ex.Message };
             }
             return _response;
-        }
-
-        [MapToApiVersion("2.0")]
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[]
-            {
-                "Value1","Value2"
-            };
         }
 
         [HttpGet("{VillaNo:int}", Name = "GetVillaNumber")]
@@ -132,7 +120,7 @@ namespace MagicVilla_VillaAPI.Controllers
 
                 _response.StatusCode = HttpStatusCode.OK;
 
-                return CreatedAtRoute("GetVillaNumber", new { VillaNo = villaNumber.VillaNo }, _response);
+                return CreatedAtRoute("GetVillaNumber", new { villaNumber.VillaNo }, _response);
             }
             catch (Exception ex)
             {
