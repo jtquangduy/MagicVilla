@@ -4,6 +4,7 @@ using MagicVilla_VillaAPI.Data;
 using MagicVilla_VillaAPI.Repository;
 using MagicVilla_VillaAPI.Repository.IRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -59,6 +60,10 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddControllers(option =>
 {
+    option.CacheProfiles.Add("Default30", new CacheProfile
+    {
+        Duration = 30
+    });
     //option.ReturnHttpNotAcceptable = true;
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -100,9 +105,9 @@ builder.Services.AddSwaggerGen(options =>
             Name = "Mai Quang Duy",
             Url = new Uri("https://maiquangduy.com")
         },
-        License=new OpenApiLicense
+        License = new OpenApiLicense
         {
-            Name= "Example License",
+            Name = "Example License",
             Url = new Uri("https://example.com/license")
         }
     });
