@@ -85,21 +85,31 @@ namespace MagicVilla_VillaAPI.Repository
             return loginResponseDTO;
         }
 
-        public async Task<LocalUser> Register(RegisterationRequestDTO registerationRequestDTO)
+        public async Task<UserDTO> Register(RegisterationRequestDTO registerationRequestDTO)
         {
-            LocalUser user = new LocalUser()
+            ApplicationUser user = new()
             {
                 UserName = registerationRequestDTO.UserName,
-                Password = registerationRequestDTO.Password,
+                Email = registerationRequestDTO.UserName,
+                NormalizedEmail = registerationRequestDTO.UserName.ToUpper(),
                 Name = registerationRequestDTO.Name,
-                Role = registerationRequestDTO.Role,
             };
 
-            _db.LocalUsers.Add(user);
-            await _db.SaveChangesAsync();
+            try
+            {
+                var result = await _userManager.CreateAsync(user, registerationRequestDTO.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "admin");
+                    var userToReturn = _db.ApplicationUsers.FirstOrDefault(u => u.UserName == registerationRequestDTO.UserName);
+                    return _mapper.Map<UserDTO>(userToReturn);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
 
-            user.Password = "";
-            return user;
+            return new UserDTO();
         }
     }
 }
