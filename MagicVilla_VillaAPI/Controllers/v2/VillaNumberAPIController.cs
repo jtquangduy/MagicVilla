@@ -25,12 +25,12 @@ namespace MagicVilla_VillaAPI.Controllers.v2
         }
 
         //[MapToApiVersion("2.0")]
-        [HttpGet]
+        [HttpGet("GetString")]
         public IEnumerable<string> Get()
         {
             return new string[]
             {
-                "Value1","Value2"
+                "Duy","MaiQuang"
             };
         }
     }
