@@ -70,6 +70,7 @@ namespace MagicVilla_VillaAPI.Controllers.v1
                 if (VillaNo == 0)
                 {
                     _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
 
@@ -78,6 +79,7 @@ namespace MagicVilla_VillaAPI.Controllers.v1
                 if (villaNumber == null)
                 {
                     _response.StatusCode = HttpStatusCode.NotFound;
+                    _response.IsSuccess = false;
                     return NotFound(_response);
                 }
 
