@@ -23,10 +23,15 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
-builder.Services.AddApiVersioning(options =>
+var apiVersioningBuilder = builder.Services.AddApiVersioning(options =>
 {
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.DefaultApiVersion = new ApiVersion(1, 0);
+});
+
+apiVersioningBuilder.AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
 });
 
 var key = builder.Configuration.GetValue<string>("Appsettings:Secret");
