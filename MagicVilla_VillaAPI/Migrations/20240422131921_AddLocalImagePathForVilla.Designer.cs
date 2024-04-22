@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicVilla_VillaAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240422095211_AddLocalImagePathForVilla")]
+    [Migration("20240422131921_AddLocalImagePathForVilla")]
     partial class AddLocalImagePathForVilla
     {
         /// <inheritdoc />
@@ -135,6 +135,9 @@ namespace MagicVilla_VillaAPI.Migrations
                     b.Property<string>("Details")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageLocalPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -163,7 +166,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 1,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 4, 22, 16, 52, 9, 651, DateTimeKind.Local).AddTicks(96),
+                            CreatedDate = new DateTime(2024, 4, 22, 20, 19, 21, 496, DateTimeKind.Local).AddTicks(8240),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://placehold.co/600x400",
                             Name = "Royal Villa",
@@ -176,7 +179,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 2,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 4, 22, 16, 52, 9, 651, DateTimeKind.Local).AddTicks(110),
+                            CreatedDate = new DateTime(2024, 4, 22, 20, 19, 21, 496, DateTimeKind.Local).AddTicks(8254),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://placehold.co/600x401",
                             Name = "Premium Pool Villa",
@@ -189,7 +192,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 3,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 4, 22, 16, 52, 9, 651, DateTimeKind.Local).AddTicks(112),
+                            CreatedDate = new DateTime(2024, 4, 22, 20, 19, 21, 496, DateTimeKind.Local).AddTicks(8256),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://placehold.co/600x402",
                             Name = "Luxury Pool Villa",
@@ -202,7 +205,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 4,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 4, 22, 16, 52, 9, 651, DateTimeKind.Local).AddTicks(114),
+                            CreatedDate = new DateTime(2024, 4, 22, 20, 19, 21, 496, DateTimeKind.Local).AddTicks(8258),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://placehold.co/600x403",
                             Name = "Diamond Villa",
@@ -215,7 +218,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 5,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 4, 22, 16, 52, 9, 651, DateTimeKind.Local).AddTicks(116),
+                            CreatedDate = new DateTime(2024, 4, 22, 20, 19, 21, 496, DateTimeKind.Local).AddTicks(8260),
                             Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://placehold.co/600x404",
                             Name = "Diamond Pool Villa",
